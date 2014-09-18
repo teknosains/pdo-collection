@@ -1,0 +1,21 @@
+body{
+    
+    background:#f8f9fa;
+    width:99%;
+}
+
+.form{
+    
+    padding:30px;
+    border:1px solid #eee;
+    background:#fff;
+    margin-left:30%;
+    width:500px;
+    height:300px;
+}
+h2{text-align:center;margin-bottom:30px;color:#ff3c1f}
+input,button {height:30px}
+
+table{border-collapse:collapse;width:100%;border:1px solid #ddd}
+table tr td,table tr th{height:30px;padding:5px}
+.footer{text-align:center;}

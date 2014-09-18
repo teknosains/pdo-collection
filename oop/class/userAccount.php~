@@ -1,0 +1,75 @@
+<?php
+
+require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'Factory.php';
+Class UserAccount{
+	
+	private $objUser;
+	public function __construct(){
+		
+		$this->objUser = Factory::getClass("Db");
+	
+	}
+	public function login($username=NULL,$password=NULL){
+				 
+		$result = $this->objUser->getWhere('user',array('username'=>$username,'password'=>md5($password)))
+						  ->num_rows();
+		
+		if($result < 1){
+			
+			print('Error : Username or password invalid');
+			exit;
+		}else{
+			session_register('username',$username);
+			header('Location:../view/admin.php');
+		}
+	}
+	
+	public function userLogout(){
+		
+		session_destroy();
+		header('Location:../index.php');
+	}
+	
+	public function addUser($data=array()){
+				
+		if(!empty($data)):
+		
+			$validateNim = $this->objUser->getWhere('mhs',array('nim'=>$data['nim']))->num_rows();
+			
+			if($validateNim <= 0): 
+				$this->objUser->insert('mhs',$data);
+				header('Location:../view/admin.php');
+			else:
+				echo 'user already Exist';exit(' <a href="../view/admin.php">admin</a>');
+			endif;		
+		endif;
+	}
+	
+	public function deleteUser($data=array()){
+		
+		if(!empty($data)):
+			$this->objUser->delete('mhs',$data);
+			
+			header('Location:../view/admin.php');
+		endif;
+	}
+	
+	public function getEditUser($data=array()){
+
+		if(!empty($data)):
+			return $this->objUser->getWhere('mhs',$data)->getRows();			
+		endif;
+		
+	}
+	public function saveEditUser($data=array(),$id){
+		
+		if(!empty($data)):
+			$this->objUser->update('mhs',$data,array('id'=>$id));		
+			header('Location:../view/admin.php');			
+		endif;
+	}
+	
+
+
+}
+
