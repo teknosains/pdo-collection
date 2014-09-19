@@ -5,6 +5,12 @@
 <!-- include summernote css/js-->
 <link href="dist/summernote.css" rel="stylesheet">
 
+<!---
+    Summernote Rich Text Editor Example with PHP & Mysql
+    http://hackerwins.github.io/summernote/
+-->
+
+
 <body>
 <div class="summernote container">
 	
